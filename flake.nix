@@ -29,6 +29,9 @@
                 numpy
                 opencv4
                 pytesseract
+                openai
+
+
                 venvShellHook
             ]);
 
