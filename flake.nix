@@ -15,17 +15,21 @@
         default = pkgs.mkShell {
           venvDir = ".venv";
           packages = with pkgs; [
-            python312
+            python311
             xorg.libX11
             xorg.xrandr
             ] ++
-            (with pkgs.python312Packages; [
-pyautogui
-pynput
-# mss
-pillow
-              pip
-              venvShellHook
+            (with pkgs.python311Packages; [
+                pyautogui
+                pynput
+                pillow
+                pip
+                #easyocr
+                keras
+                numpy
+                opencv4
+                pytesseract
+                venvShellHook
             ]);
 
 

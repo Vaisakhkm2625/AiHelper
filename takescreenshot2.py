@@ -21,28 +21,29 @@ def on_move(x, y):
         # This part could be used to show a live preview or tracking
         pass
 
-def take_screenshot(start_x, start_y, end_x, end_y):
+def crop_screenshot(img, start_x, start_y, end_x, end_y):
     # Normalize coordinates (make sure start is top-left, end is bottom-right)
     left = min(start_x, end_x)
     top = min(start_y, end_y)
     right = max(start_x, end_x)
     bottom = max(start_y, end_y)
     
-    # Take the screenshot using Pillow
-    img = ImageGrab.grab(bbox=(left, top, right, bottom))
-    #img.show()  # To display the image
-    print('hello')
-
-    img.save("screenshot.png")  # Save the screenshot as 'screenshot.png'
+    # Crop the image using the specified coordinates
+    cropped_img = img.crop((left, top, right, bottom))
+    #cropped_img.show()  # To display the cropped image
+    cropped_img.save("cropped_screenshot.png")  # Save the cropped screenshot
 
 def main():
+    # Take a full-screen screenshot
+    full_screenshot = ImageGrab.grab()
+
     # Collect mouse events until released
     with mouse.Listener(on_click=on_click, on_move=on_move) as listener:
         listener.join()
 
-    # Once mouse listener is done, take the screenshot
+    # Once mouse listener is done, crop the screenshot
     if start_x is not None and start_y is not None and end_x is not None and end_y is not None:
-        take_screenshot(start_x, start_y, end_x, end_y)
+        crop_screenshot(full_screenshot, start_x, start_y, end_x, end_y)
     else:
         print("No area selected.")
 
