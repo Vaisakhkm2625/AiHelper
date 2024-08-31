@@ -16,15 +16,19 @@
           venvDir = ".venv";
           packages = with pkgs; [
             python312
+            xorg.libX11
+            xorg.xrandr
             ] ++
             (with pkgs.python312Packages; [
 pyautogui
 pynput
-#mss
+# mss
 pillow
               pip
               venvShellHook
             ]);
+
+
         };
 
       });
