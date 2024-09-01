@@ -1,7 +1,8 @@
 
 from PIL import Image, ImageDraw
+from functools import cache
 
-
+@cache
 def draw_penguin_logo(width,height):
 
 # Create a blank image with a transparent background, at a higher resolution
