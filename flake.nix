@@ -30,6 +30,7 @@
                 opencv4
                 pytesseract
                 openai
+                platformdirs
 
 
                 venvShellHook
