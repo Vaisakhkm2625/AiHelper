@@ -31,6 +31,7 @@
                 pytesseract
                 openai
                 platformdirs
+                pystray
 
 
                 venvShellHook

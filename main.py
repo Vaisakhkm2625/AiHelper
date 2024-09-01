@@ -12,7 +12,6 @@ config_dir = platformdirs.user_config_dir(app_name,app_auther)
 config_file = os.path.join(config_dir,"settings.ini")
 
 
-
 print(config_file)
 
 
