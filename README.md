@@ -15,3 +15,6 @@ nuitka for crossplatform bin gneeration
 https://www.youtube.com/watch?v=z2aHkuBCLN8
 pyinstaller alternative
 
+2024-09-02
+now make main.py 
+put systray+hotkeys in ia
