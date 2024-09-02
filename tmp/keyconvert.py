@@ -7,6 +7,7 @@ index = 0
 
 def on_press(key):
     global index
+    print('hello')
     try:
         # Intercept any key press and type the next character of the replacement string
         if index >= len(replacement_string):
@@ -38,6 +39,7 @@ def on_activate_h():
 
 def on_activate_i():
     print('<ctrl>+<alt>+i pressed')
+    h.stop()
 
 
 with keyboard.GlobalHotKeys({

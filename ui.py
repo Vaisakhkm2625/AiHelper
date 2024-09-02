@@ -1,68 +1,27 @@
 import platformdirs 
-
-import configparser
-import tkinter as tk
 import os
+import tkinter as tk
 from tkinter import StringVar, OptionMenu, Label, Entry, Button
+from settings import load_settings, save_settings
+
 
 app_auther = "vaisaskh"
 app_name = "aihelper"
+fake_app_name = app_name
 
 config_dir = platformdirs.user_config_dir(app_name,app_auther)
 config_file = os.path.join(config_dir,"settings.ini")
 
-
 print(config_file)
-
-
-# Function to load settings
-def load_settings(config_file):
-    config = configparser.ConfigParser()
-
-    config_dir=os.path.dirname(config_file)
-    if not os.path.exists(config_dir):
-        os.makedirs(config_dir)
-
-    if not os.path.exists(config_file):
-        config["SETTINGS"] = {
-            "openai_key": "",
-            "ocr_option": "tesseract",
-            "keybinding_to_start_typing": "Ctrl+Shift+S",
-            "keybinding_to_stop_typing": "Ctrl+Shift+X",
-            "keybinding_to_take_screenshot": "Ctrl+Shift+C"
-        }
-        with open(config_file, 'w') as configfile:
-            config.write(configfile)
-    else:
-        config.read(config_file)
-
-    
-    settings = {
-        "openai_key": config.get("SETTINGS", "openai_key", fallback=""),
-        "ocr_option": config.get("SETTINGS", "ocr_option", fallback="tesseract"),
-        "keybinding_to_start_typing": config.get("SETTINGS", "keybinding_to_start_typing", fallback="Ctrl+Shift+S"),
-        "keybinding_to_stop_typing": config.get("SETTINGS", "keybinding_to_stop_typing", fallback="Ctrl+Shift+X"),
-        "keybinding_to_take_screenshot": config.get("SETTINGS", "keybinding_to_take_screenshot", fallback="Ctrl+Shift+C")
-    }
-    
-    return settings
-
-# Function to save settings
-def save_settings(config_file, settings):
-    config = configparser.ConfigParser()
-    config["SETTINGS"] = settings
-    
-    with open(config_file, 'w') as configfile:
-        config.write(configfile)
 
 
 
 # Function to create the PyTinker GUI for settings
 def create_settings_gui(config_file):
-    settings = load_settings(config_file)
+    settings = load_settings(config_file,app_name)
     
     root = tk.Tk()
-    root.title(app_name)
+    root.title(fake_app_name)
     
     openai_key_var = StringVar(value=settings["openai_key"])
     ocr_option_var = StringVar(value=settings["ocr_option"])
@@ -107,7 +66,8 @@ def create_settings_gui(config_file):
     root.mainloop()
 
 # Example usage
-create_settings_gui(config_file)
+if __name__ == "__main__":
+    create_settings_gui(config_file)
 
 
 

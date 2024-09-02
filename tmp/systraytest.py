@@ -1,7 +1,7 @@
-import pystray
+from pystray import Menu,MenuItem,Icon
 
 from PIL import Image, ImageDraw
-from generate_penguine_logo import draw_penguin_logo
+from generate_penguin_logo import draw_penguin_logo
 
 
 def create_image(width, height, color1, color2):
@@ -19,10 +19,11 @@ def create_image(width, height, color1, color2):
 
 
 # In order for the icon to be displayed, you must provide an icon
-icon = pystray.Icon(
-    'test name',
-    icon=draw_penguin_logo(64, 64))
-
+icon = Icon(
+    'Start Listening',
+    icon=draw_penguin_logo(64, 64),
+    menu=Menu(MenuItem('Quit', lambda: icon.stop()))
+)
 
 # To finally show you icon, call run
 icon.run()
