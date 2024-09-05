@@ -18,17 +18,19 @@ config_file = os.path.join(config_dir,"settings.ini")
 print(config_file)
 
 
-
 settings = load_settings(config_file,app_name)
 
-
-
+def stop_hotkeys():
+    print("helllosa")
+def start_hotkeys():
+    pass
 
 icon = Icon(
     'Start Listening',
     icon=draw_penguin_logo(64, 64),
     menu=Menu(
-        MenuItem('Start', lambda: icon.stop()),
+        MenuItem('Start Hotkeys', start_hotkeys),
+        MenuItem('Stop Hotkeys', stop_hotkeys),
         MenuItem('Quit', lambda: icon.stop())
     )
 )

@@ -1,4 +1,4 @@
-#!/home/vaisakh/vaisakhRoot/programming/python/keyboardtest/.venv/bin/python3.11
+#!/home/vaisakh/vaisakhRoot/programming/python/exhelper/.venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

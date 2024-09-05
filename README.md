@@ -1,5 +1,8 @@
 # ai helper
 
+install copykitten impure way
+within shell
+
 
 - screenshot PIL
 - ocr with tesseract 

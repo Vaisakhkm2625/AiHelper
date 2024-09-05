@@ -32,10 +32,14 @@
                 openai
                 platformdirs
                 pystray
-
-
                 venvShellHook
             ]);
+
+            venvShellHook = ''
+            echo "installing additional packages"
+            echo "installing copy kittens"
+            pip install copykittens
+            '';
 
 
         };
