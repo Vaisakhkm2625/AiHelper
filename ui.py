@@ -19,6 +19,8 @@ def create_settings_gui(config_file,app_name):
     fake_app_name_var = StringVar(value=settings["fake_app_name"])
     stop_keybinding_var = StringVar(value=settings["keybinding_to_stop_typing"])
     screenshot_keybinding_var = StringVar(value=settings["keybinding_to_take_screenshot"])
+    sent_image_to_chat_gpt_keybinding_var = StringVar(value=settings["keybinding_to_sent_image_to_chat_gpt"])
+
     
     # OpenAI Key
     Label(root, text="OpenAI Key").grid(row=0, column=0, padx=10, pady=5, sticky="w")
@@ -26,24 +28,32 @@ def create_settings_gui(config_file,app_name):
     
     # OCR Option
     Label(root, text="OCR Option").grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    OptionMenu(root, ocr_option_var, "tesseract", "openai_vision").grid(row=1, column=1, padx=10, pady=5)
+    ocr_menu = OptionMenu(root, ocr_option_var, "openai_vision","tesseract" )
+    ocr_menu.grid(row=1, column=1, padx=10, pady=5)
+    ocr_menu.config(state='disabled')
+
+
+    # Keybinding to Take Screenshot
+    Label(root, text="Keybinding to Take Screenshot").grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=screenshot_keybinding_var).grid(row=2, column=1, padx=10, pady=5)
     
-    # Keybinding to Start Typing
-    Label(root, text="Keybinding to Start Typing").grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=start_keybinding_var).grid(row=2, column=1, padx=10, pady=5)
+    Label(root, text="Keybinding to sent image to openai").grid(row=3, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=sent_image_to_chat_gpt_keybinding_var).grid(row=3, column=1, padx=10, pady=5)
 
     # Keybinding to Start Typing
-    Label(root, text="fake app name").grid(row=3, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=fake_app_name_var).grid(row=3, column=1, padx=10, pady=5)
-    
+    Label(root, text="Keybinding to Start Typing").grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=start_keybinding_var).grid(row=4, column=1, padx=10, pady=5)
+
     # Keybinding to Stop Typing
-    Label(root, text="Keybinding to Stop Typing").grid(row=4, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=stop_keybinding_var).grid(row=4, column=1, padx=10, pady=5)
+    Label(root, text="Keybinding to Stop Typing").grid(row=5, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=stop_keybinding_var).grid(row=5, column=1, padx=10, pady=5)
     
-    # Keybinding to Take Screenshot
-    Label(root, text="Keybinding to Take Screenshot").grid(row=5, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=screenshot_keybinding_var).grid(row=5, column=1, padx=10, pady=5)
+
+    Label(root, text="fake app name").grid(row=6, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=fake_app_name_var).grid(row=6, column=1, padx=10, pady=5)
     
+
+
     # Save Button
     def save():
         settings = {
@@ -52,6 +62,7 @@ def create_settings_gui(config_file,app_name):
             "keybinding_to_start_typing": start_keybinding_var.get(),
             "keybinding_to_stop_typing": stop_keybinding_var.get(),
             "keybinding_to_take_screenshot": screenshot_keybinding_var.get(),
+            "keybinding_to_sent_image_to_chat_gpt": sent_image_to_chat_gpt_keybinding_var.get(),
                     "fake_app_name":fake_app_name_var.get(),
         }
         save_settings(config_file, settings)

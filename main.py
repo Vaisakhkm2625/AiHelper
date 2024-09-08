@@ -8,6 +8,7 @@ from settings import load_settings, save_settings
 from screenshot import take_and_crop_screenshot_thread
 from clipboard_keyremap import Remapper
 import  ui
+import openaivision
 import platformdirs
 
 
@@ -38,7 +39,12 @@ class HotkeyManager:
         self.listener.stop_remapping()
 
     def on_take_screenshot_pressed(self):
+        print('take screenshot pressed')
         take_and_crop_screenshot_thread()
+
+    def on_sent_image_to_chat_gpt_pressed(self):
+        print('senting image to open ai')
+        openaivision.openai_image_reponse(settings['openai_key'])
 
     def on_press(self, key):
         print(f"Key pressed: {key}")
@@ -51,7 +57,8 @@ class HotkeyManager:
             self.keyboard_instance = keyboard.GlobalHotKeys({
                 settings['keybinding_to_start_typing']: self.on_start_remapping_pressed,
                 settings['keybinding_to_stop_typing']: self.on_stop_remapping_pressed,
-                settings['keybinding_to_take_screenshot']: self.on_take_screenshot_pressed
+                settings['keybinding_to_take_screenshot']: self.on_take_screenshot_pressed,
+                settings['keybinding_to_sent_image_to_chat_gpt']: self.on_sent_image_to_chat_gpt_pressed
             })
             self.keyboard_instance.start()
 
