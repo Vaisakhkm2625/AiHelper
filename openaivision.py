@@ -8,10 +8,10 @@ def encode_image(image_path):
     return base64.b64encode(image_file.read()).decode('utf-8')
 
 
-def openai_image_reponse(API_KEY):
+def openai_image_reponse(API_KEY,image_path):
 
 # Path to your image
-    image_path = "./cropped_screenshot.png"
+    #image_path = "./cropped_screenshot.png"
 
 # Getting the base64 string
     base64_image = encode_image(image_path)
@@ -55,7 +55,8 @@ if __name__ == "__main__":
 
     config_dir = platformdirs.user_config_dir(app_name,app_auther)
     config_file = os.path.join(config_dir,"settings.ini")
+    image_file_path = os.path.join(config_dir,"cropped_screenshot.png")
 
     settings = load_settings(config_file,app_name)
-    openai_image_reponse(settings['openai_key'])
+    openai_image_reponse(settings['openai_key'],image_file_path)
     

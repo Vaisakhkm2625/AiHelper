@@ -26,10 +26,10 @@ def crop_screenshot(img, start_x, start_y, end_x, end_y):
     
     # Crop the image using the specified coordinates
     cropped_img = img.crop((left, top, right, bottom))
-    print("saving cropped screenshot")
-    cropped_img.save("cropped_screenshot.png")  # Save the cropped screenshot
+    #cropped_img.save("cropped_screenshot.png")  # Save the cropped screenshot
+    return cropped_img
 
-def take_and_crop_screenshot():
+def take_and_crop_screenshot(image_file_path):
     # Take a full-screen screenshot
     full_screenshot = ImageGrab.grab()
 
@@ -39,13 +39,14 @@ def take_and_crop_screenshot():
 
     # Once mouse listener is done, crop the screenshot
     if start_x is not None and start_y is not None and end_x is not None and end_y is not None:
-        crop_screenshot(full_screenshot, start_x, start_y, end_x, end_y)
+        cropped_img = crop_screenshot(full_screenshot, start_x, start_y, end_x, end_y)
+        cropped_img.save(image_file_path)
     else:
         print("No area selected.")
 
-def take_and_crop_screenshot_thread():
+def take_and_crop_screenshot_thread(image_file_path):
     print("Hotkey activated! Taking screenshot...")
-    screenshot_thread = threading.Thread(target=take_and_crop_screenshot)
+    screenshot_thread = threading.Thread(target=take_and_crop_screenshot,args=(image_file_path,))
     screenshot_thread.start()
 
 def for_canonical(f):
@@ -53,5 +54,5 @@ def for_canonical(f):
 
 if __name__ == "__main__":
     # Define a hotkey listener
-    with keyboard.GlobalHotKeys({hotkey: take_and_crop_screenshot_thread}) as listener:
+    with keyboard.GlobalHotKeys({hotkey:lambda: take_and_crop_screenshot_thread('./screenshot.png')}) as listener:
         listener.join()

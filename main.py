@@ -18,6 +18,7 @@ fake_app_name = app_name
 
 config_dir = platformdirs.user_config_dir(app_name,app_auther)
 config_file = os.path.join(config_dir,"settings.ini")
+image_file_path = os.path.join(config_dir,"cropped_screenshot.png")
 
 print(config_file)
 
@@ -40,11 +41,11 @@ class HotkeyManager:
 
     def on_take_screenshot_pressed(self):
         print('take screenshot pressed')
-        take_and_crop_screenshot_thread()
+        take_and_crop_screenshot_thread(image_file_path)
 
     def on_sent_image_to_chat_gpt_pressed(self):
         print('senting image to open ai')
-        openaivision.openai_image_reponse(settings['openai_key'])
+        openaivision.openai_image_reponse(settings['openai_key'],image_file_path)
 
     def on_press(self, key):
         print(f"Key pressed: {key}")
