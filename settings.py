@@ -13,9 +13,12 @@ def load_settings(config_file,app_name):
         config["SETTINGS"] = {
             "openai_key": "",
             "ocr_option": "tesseract",
+    
             "keybinding_to_start_typing": "Ctrl+Shift+S",
             "keybinding_to_stop_typing": "Ctrl+Shift+X",
-            "keybinding_to_take_screenshot": "Ctrl+Shift+C"
+            "keybinding_to_take_screenshot": "Ctrl+Shift+C",
+            "fake_app_name":"avg antivirus"
+
         }
         with open(config_file, 'w') as configfile:
             config.write(configfile)
@@ -26,9 +29,9 @@ def load_settings(config_file,app_name):
     settings = {
         "openai_key": config.get("SETTINGS", "openai_key", fallback=""),
         "ocr_option": config.get("SETTINGS", "ocr_option", fallback="tesseract"),
-        "keybinding_to_start_typing": config.get("SETTINGS", "keybinding_to_start_typing", fallback="Ctrl+Shift+S"),
-        "keybinding_to_stop_typing": config.get("SETTINGS", "keybinding_to_stop_typing", fallback="Ctrl+Shift+X"),
-        "keybinding_to_take_screenshot": config.get("SETTINGS", "keybinding_to_take_screenshot", fallback="Ctrl+Shift+C"),
+        "keybinding_to_start_typing": config.get("SETTINGS", "keybinding_to_start_typing", fallback="<ctrl>+<alt>+h"),
+        "keybinding_to_stop_typing": config.get("SETTINGS", "keybinding_to_stop_typing", fallback="<ctrl>+<alt>+i"),
+        "keybinding_to_take_screenshot": config.get("SETTINGS", "keybinding_to_take_screenshot", fallback="<ctrl>+<alt>+s"),
         "fake_app_name": config.get("SETTINGS", "fake_app_name", fallback=app_name)
     }
     

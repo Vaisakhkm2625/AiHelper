@@ -1,4 +1,3 @@
-
 from pynput import mouse, keyboard
 from PIL import ImageGrab
 import threading

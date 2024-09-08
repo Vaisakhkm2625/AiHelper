@@ -1,6 +1,5 @@
 from openai import OpenAI
 import base64
-
 import copykitten
 
 
@@ -25,7 +24,7 @@ def openai_image_reponse(API_KEY):
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": "Please answer question in this image."},
+            {"type": "text", "text": "Please answer question in this image. response shouldn't be like an ai assistant, just answer is enough."},
             {
             "type": "image_url",
             "image_url": {
@@ -38,9 +37,25 @@ def openai_image_reponse(API_KEY):
     max_tokens=300,
     )
 
-    print(response.choices[0])
-    #copykitten.copy(response.choices[0])
+    result = response.choices[0].message.content
+
+    print(result)
+    if result is None:
+        result = "oops" 
+    copykitten.copy(result)
 
 if __name__ == "__main__":
-    openai_image_reponse("sk-1234567890abcdef1234567890abcdef")
+
+    from settings import load_settings
+    import platformdirs
+    import os
+
+    app_auther = "vaisaskh"
+    app_name = "aihelper"
+
+    config_dir = platformdirs.user_config_dir(app_name,app_auther)
+    config_file = os.path.join(config_dir,"settings.ini")
+
+    settings = load_settings(config_file,app_name)
+    openai_image_reponse(settings['openai_key'])
     

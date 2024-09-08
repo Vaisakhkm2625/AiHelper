@@ -6,18 +6,17 @@ from settings import load_settings, save_settings
 
 
 
-
-
 # Function to create the PyTinker GUI for settings
-def create_settings_gui(config_file):
+def create_settings_gui(config_file,app_name):
     settings = load_settings(config_file,app_name)
     
     root = tk.Tk()
-    root.title(fake_app_name)
+    root.title(settings["fake_app_name"])
     
     openai_key_var = StringVar(value=settings["openai_key"])
     ocr_option_var = StringVar(value=settings["ocr_option"])
     start_keybinding_var = StringVar(value=settings["keybinding_to_start_typing"])
+    fake_app_name_var = StringVar(value=settings["fake_app_name"])
     stop_keybinding_var = StringVar(value=settings["keybinding_to_stop_typing"])
     screenshot_keybinding_var = StringVar(value=settings["keybinding_to_take_screenshot"])
     
@@ -32,14 +31,18 @@ def create_settings_gui(config_file):
     # Keybinding to Start Typing
     Label(root, text="Keybinding to Start Typing").grid(row=2, column=0, padx=10, pady=5, sticky="w")
     Entry(root, textvariable=start_keybinding_var).grid(row=2, column=1, padx=10, pady=5)
+
+    # Keybinding to Start Typing
+    Label(root, text="fake app name").grid(row=3, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=fake_app_name_var).grid(row=3, column=1, padx=10, pady=5)
     
     # Keybinding to Stop Typing
-    Label(root, text="Keybinding to Stop Typing").grid(row=3, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=stop_keybinding_var).grid(row=3, column=1, padx=10, pady=5)
+    Label(root, text="Keybinding to Stop Typing").grid(row=4, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=stop_keybinding_var).grid(row=4, column=1, padx=10, pady=5)
     
     # Keybinding to Take Screenshot
-    Label(root, text="Keybinding to Take Screenshot").grid(row=4, column=0, padx=10, pady=5, sticky="w")
-    Entry(root, textvariable=screenshot_keybinding_var).grid(row=4, column=1, padx=10, pady=5)
+    Label(root, text="Keybinding to Take Screenshot").grid(row=5, column=0, padx=10, pady=5, sticky="w")
+    Entry(root, textvariable=screenshot_keybinding_var).grid(row=5, column=1, padx=10, pady=5)
     
     # Save Button
     def save():
@@ -48,7 +51,8 @@ def create_settings_gui(config_file):
             "ocr_option": ocr_option_var.get(),
             "keybinding_to_start_typing": start_keybinding_var.get(),
             "keybinding_to_stop_typing": stop_keybinding_var.get(),
-            "keybinding_to_take_screenshot": screenshot_keybinding_var.get()
+            "keybinding_to_take_screenshot": screenshot_keybinding_var.get(),
+                    "fake_app_name":fake_app_name_var.get(),
         }
         save_settings(config_file, settings)
         root.destroy()
@@ -69,7 +73,7 @@ if __name__ == "__main__":
 
     print(config_file)
 
-    create_settings_gui(config_file)
+    create_settings_gui(config_file,app_name)
 
 
 
