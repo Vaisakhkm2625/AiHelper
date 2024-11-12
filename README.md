@@ -1,5 +1,8 @@
 # ai helper
 
+POC for 
+https://github.com/Vaisakhkm2625/AiHelper2
+
 install copykitten impure way
 within shell
 
